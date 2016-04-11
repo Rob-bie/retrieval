@@ -31,4 +31,19 @@ defmodule Retrieval do
     Map.put(trie, :mark, :mark)
   end
 
+  def contains?(%Trie{trie: trie}, binary) when is_binary(binary) do
+    _contains?(trie, binary)
+  end
+
+  defp _contains?(trie, <<next, rest :: binary>>) do
+    case Map.has_key?(trie, next) do
+      true  -> _contains?(trie[next], rest)
+      false -> false
+    end
+  end
+
+  defp _contains?(%{mark: :mark}, <<>>) do
+    true
+  end
+
 end
