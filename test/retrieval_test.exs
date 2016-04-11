@@ -18,4 +18,14 @@ defmodule RetrievalTest do
     assert Retrieval.contains?(@test_trie, "abcde") == false
   end
 
+  test "prefix" do
+    app_prefix = ["apple", "apply"]
+    n_prefix = ["negative"]
+    abc_prefix = []
+
+    assert Retrieval.prefix(@test_trie, "app") == app_prefix
+    assert Retrieval.prefix(@test_trie, "n")   == n_prefix
+    assert Retrieval.prefix(@test_trie, "abc") == abc_prefix
+  end
+
 end
