@@ -19,13 +19,24 @@ defmodule RetrievalTest do
   end
 
   test "prefix" do
-    app_prefix = ["apple", "apply"]
-    n_prefix = ["negative"]
-    abc_prefix = []
+    assert Retrieval.prefix(@test_trie, "app") == ["apple", "apply"]
+    assert Retrieval.prefix(@test_trie, "n")   == ["negative"]
+    assert Retrieval.prefix(@test_trie, "abc") == []
+  end
 
-    assert Retrieval.prefix(@test_trie, "app") == app_prefix
-    assert Retrieval.prefix(@test_trie, "n")   == n_prefix
-    assert Retrieval.prefix(@test_trie, "abc") == abc_prefix
+  test "pattern errors" do
+    assert match?({:error, _}, Retrieval.pattern(@test_trie, "ab*[^zsd"))
+    assert match?({:error, _}, Retrieval.pattern(@test_trie, "ab*[^zsd]{}"))
+    assert match?({:error, _}, Retrieval.pattern(@test_trie, "ab*[^zsd]{1[^abc]a}"))
+    assert match?({:error, _}, Retrieval.pattern(@test_trie, "ab*[^zsd]{1[^abc]"))
+    assert match?({:error, _}, Retrieval.pattern(@test_trie, "ab*[^zsd]{1[^ab*c]a}{1}"))
+  end
+
+  test "pattern" do
+    assert Retrieval.pattern(@test_trie, "*{1}{1}**") == ["apple", "apply"]
+    assert Retrieval.pattern(@test_trie, "[^abc]{1}{1}**") == []
+    assert Retrieval.pattern(@test_trie, "[co]**") == ["cat", "out"]
+    assert Retrieval.pattern(@test_trie, "{1[^okjh]}x[tnm]{1}*{2}{1}{2}") == ["extended"]
   end
 
 end
