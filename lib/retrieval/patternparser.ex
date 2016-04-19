@@ -27,13 +27,18 @@ defmodule Retrieval.PatternParser do
     parse_cap(rest, col + 1, acc, <<>>, col)
   end
 
-  # Accept character
-  def parse(<<ch, rest :: binary>>, col, acc) do
-    parse(rest, col + 1, [{:character, ch}|acc])
-  end
-
   # Pattern consumed, return parsed pattern
   def parse(<<>>, _col, acc), do: Enum.reverse(acc)
+
+  # Accept character
+  def parse(binary, col, acc) do
+    case parse_escape(binary, col) do
+      {:escape, ch, rest}    ->
+        parse(rest, col + 3, [{:character, ch}|acc])
+      {:character, ch, rest} ->
+        parse(rest, col + 1, [{:character, ch}|acc])
+    end
+  end
 
   # Accept group
   defp parse_gr(<<"]", rest :: binary>>, col, group, acc, type, _start) do
