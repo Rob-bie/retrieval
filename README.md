@@ -3,6 +3,8 @@
 Retrieval is a tradional trie implementation in pure Elixir that supports pattern based lookup and a variety
 of other functionality.
 
+<div style="text-align:center"><a href="https://hexdocs.pm/retrieval/api-reference.html"><b>[ DOCUMENTATION ]</b></a></div>
+
 - [Installation](#installation)
 - [Usage](#usage)
   - [Creating a new trie](#creating-a-new-trie)
@@ -20,7 +22,13 @@ of other functionality.
 
 ## Installation
 
-Coming soon!
+Add Retrieval to your `mix.exs` dependencies:
+
+```elixir
+def deps do
+  [{:retrieval, "~> 0.9.0"}]
+end
+```
 
 ## Usage
 
@@ -275,12 +283,12 @@ The following symbols can be escaped:
 
 | Symbol  | Escaped symbol |
 | :-------------: | :-------------: |
-| * | \\* |
-| ^ | \\^ |
-| [ | \\[ |
-| ] | \\] |
-| { | \\{ |
-| } | \\} |
+| * | \\\\* |
+| ^ | \\\\^ |
+| [ | \\\\[ |
+| ] | \\\\] |
+| { | \\\\{ |
+| } | \\\\} |
 
 And in action:
 
