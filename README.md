@@ -24,7 +24,7 @@ Add Retrieval to your `mix.exs` dependencies:
 
 ```elixir
 def deps do
-  [{:retrieval, "~> 0.9.0"}]
+  [{:retrieval, "~> 0.9.1"}]
 end
 ```
 
