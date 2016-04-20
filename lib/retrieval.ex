@@ -94,6 +94,10 @@ defmodule Retrieval do
     true
   end
 
+  defp _contains?(_trie, <<>>) do
+    false
+  end
+
   @doc """
   Collects all binaries that begin with a given prefix.
 

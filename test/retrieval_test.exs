@@ -16,6 +16,7 @@ defmodule RetrievalTest do
     assert Retrieval.contains?(@test_trie, "apple") == true
     assert Retrieval.contains?(@test_trie, "smash") == true
     assert Retrieval.contains?(@test_trie, "abcde") == false
+    assert Retrieval.contains?(@test_trie, "app")   == false
   end
 
   test "prefix" do
